@@ -10,8 +10,9 @@ const bcrypt = require('bcrypt');
 module.exports = {
 
   customToJSON: async (user) => {
-    const obj = user.toObject();
+    const obj = {...user};
     delete obj.password;
+    return obj;
   },
 
   beforeCreate: (values, callback) => {

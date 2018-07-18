@@ -12,24 +12,29 @@ module.exports = {
 
         const data = _.pick(req.body, allowedParameters);
 
-        User.create(data).then((user) => {
-            console.log('here');
+        User
+        .create(data).fetch()
+        .then(async (user) => {
             const responseData = {
-                user,
-                token: JwtService.issue({ id: user.id }),
+                user: await User.customToJSON(user),
+                token: await JwtService.issue({ id: user.id }),
             };
-            return res.json(200, {
+            return res
+            .status(201)
+            .json({
                 error: false,
                 message: 'User succesfully created',
                 data: responseData,
             });
         })
         .catch((error) => {
-            if (error.invalidAttributes){
-                return res.json(500, {
+            if (error) {
+                return res
+                .status(400)
+                .json({
                     error: true,
-                    message: 'User could not be created',
-                    data: error.Errors,
+                    message: 'Something went wrong',
+                    data: error
                 })
             }
         });
