@@ -1,7 +1,11 @@
 const _ = require('lodash');
 
 module.exports = {
-    create: (req, res) => {
+    /**
+     * This method accepts user input specifying the details of a new 
+     * account which will be created and returned to the requester
+     */
+    register: (req, res) => {
         if (req.body.password !== req.body.confirmPassword) {
             return res.status(400).json({ error: true, message: 'Provided passwords do not match' });
         }
@@ -37,6 +41,59 @@ module.exports = {
                     data: error
                 })
             }
+        });
+    },
+
+    /**
+     * This method accepts the credentials of an existing account 
+     * and returns its authentication token
+     */
+    authenticate: (req, res) => {
+        if (!req.body.email || !req.body.password) {
+            return res
+            .status(400)
+            .json({
+                error: true,
+                message: 'email or password are missing or invalid',
+                data: []
+            });
+        }
+
+        User.findOne({ email: req.body.email })
+        .then((user) => {
+            if (!user) {
+                throw new Error('No user was found matching this email');
+            }
+            console.log('details', user, req.body.password);
+            User.comparePassword(req.body.password, user)
+            .then(async (match) => {
+                if (!match) {
+                    throw new Error('The provided username or password are incorrect');
+                }
+                const responseData = {
+                    user: await User.customToJSON(user),
+                    token: await JwtService.issue({ id: user.id }),
+                };
+                return res
+                .status(200)
+                .json({
+                    error: false,
+                    message: 'Authentication successful',
+                    data: responseData,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        })
+        .catch((error) => {
+            return res
+            .status(400)
+            .json({
+                error: true,
+                message: error.message,
+                data: error,
+            });
         });
     },
 };

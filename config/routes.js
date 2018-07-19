@@ -28,7 +28,9 @@ module.exports.routes = {
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
   'GET /': 'BaseController.index',
-  'POST /signup': 'UserController.create',
+
+  'POST /api/v1/account/register'     : 'UserController.register',
+  'POST /api/v1/account/authenticate' : 'UserController.authenticate',
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
