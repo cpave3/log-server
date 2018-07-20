@@ -55,7 +55,10 @@ module.exports = {
         columnName: 'encryptedPassword'
       },
 
-      
+      meta: {
+        type: 'json',
+        required: false
+      },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

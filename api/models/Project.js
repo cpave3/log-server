@@ -22,6 +22,11 @@ module.exports = {
       type: 'string',
       required: false,
     },
+
+    meta: {
+      type: 'json',
+      required: false
+    },
    
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
