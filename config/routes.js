@@ -28,10 +28,17 @@ module.exports.routes = {
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
   'GET /': 'BaseController.index',
+  'GET /api/v1': 'BaseController.index',
 
   // Unprotected
   'POST /api/v1/account/register'     : 'UserController.register',
   'POST /api/v1/account/authenticate' : 'UserController.authenticate',
+
+  'GET /api/v1/teams': 'TeamController.index',
+
+  'GET /api/v1/projects': 'ProjectController.index',
+
+  'GET /api/v1/records': 'RecordController.index',
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗

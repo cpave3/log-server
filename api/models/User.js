@@ -59,7 +59,6 @@ module.exports = {
         type: 'boolean',
         defaultsTo: false,
         allowNull: false,
-        required: true
       },
 
       meta: {
