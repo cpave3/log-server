@@ -29,6 +29,7 @@ module.exports.routes = {
 
   'GET /': 'BaseController.index',
 
+  // Unprotected
   'POST /api/v1/account/register'     : 'UserController.register',
   'POST /api/v1/account/authenticate' : 'UserController.authenticate',
 
