@@ -55,6 +55,13 @@ module.exports = {
         columnName: 'encryptedPassword'
       },
 
+      is_super: {
+        type: 'boolean',
+        defaultsTo: false,
+        allowNull: false,
+        required: true
+      },
+
       meta: {
         type: 'json',
         required: false
