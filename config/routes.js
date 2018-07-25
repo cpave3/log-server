@@ -27,6 +27,7 @@ module.exports.routes = {
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
+  // Debug
   'GET /': 'BaseController.index',
   'GET /api/v1': 'BaseController.index',
 
@@ -34,9 +35,13 @@ module.exports.routes = {
   'POST /api/v1/account/register'     : 'UserController.register',
   'POST /api/v1/account/authenticate' : 'UserController.authenticate',
 
+  // Protected
   'GET /api/v1/account' : 'UserController.account',
 
-  'GET /api/v1/teams': 'TeamController.index',
+  'POST   /api/v1/teams' : 'TeamController.create',
+  'GET    /api/v1/teams' : 'TeamController.read',
+  'PUT    /api/v1/teams' : 'TeamController.update',
+  'DELETE /api/v1/teams' : 'TeamController.delete',
 
   'GET /api/v1/projects': 'ProjectController.index',
 
