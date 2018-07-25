@@ -9,9 +9,19 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
 
-  customToJSON: async (user) => {
-    const obj = {...user};
-    delete obj.password;
+  transform: async (user) => {
+    const obj = {...user}
+
+    // Define the things we want to hide from responses
+    const hidden = [
+      'password', 'is_super', 'meta'
+    ];
+
+    // Remove anything which we don't want to expose via the API
+    hidden.forEach((attribute) => {
+      delete obj[attribute];
+    });
+
     return obj;
   },
 

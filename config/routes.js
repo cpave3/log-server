@@ -34,6 +34,8 @@ module.exports.routes = {
   'POST /api/v1/account/register'     : 'UserController.register',
   'POST /api/v1/account/authenticate' : 'UserController.authenticate',
 
+  'GET /api/v1/account' : 'UserController.account',
+
   'GET /api/v1/teams': 'TeamController.index',
 
   'GET /api/v1/projects': 'ProjectController.index',

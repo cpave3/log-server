@@ -17,6 +17,13 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  // By default, everything is protected
+  '*': 'isAuthorised',
+
+  // Allow access to signup and Authenticate
+  UserController: {
+    'register': true,
+    'authenticate': true,
+  },
 
 };

@@ -20,7 +20,7 @@ module.exports = {
         .create(data).fetch()
         .then(async (user) => {
             const responseData = {
-                user: await User.customToJSON(user),
+                user: await User.transform(user),
                 token: await JwtService.issue({ id: user.id }),
             };
             return res
@@ -64,14 +64,13 @@ module.exports = {
             if (!user) {
                 throw new Error('No user was found matching this email');
             }
-            console.log('details', user, req.body.password);
             User.comparePassword(req.body.password, user)
             .then(async (match) => {
                 if (!match) {
                     throw new Error('The provided username or password are incorrect');
                 }
                 const responseData = {
-                    user: await User.customToJSON(user),
+                    user: await User.transform(user),
                     token: await JwtService.issue({ id: user.id }),
                 };
                 return res
@@ -83,7 +82,7 @@ module.exports = {
                 });
             })
             .catch((error) => {
-                console.log(error);
+                sails.log.error(error);
             })
         })
         .catch((error) => {
@@ -94,6 +93,12 @@ module.exports = {
                 message: error.message,
                 data: error,
             });
+        });
+    },
+
+    account: async (req, res) => {
+        return res.status(200).json({
+            user: await User.transform(req.user)
         });
     },
 };

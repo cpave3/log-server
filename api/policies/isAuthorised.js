@@ -31,8 +31,15 @@ module.exports = (req, res, next) => {
             });
         }
 
-        req.user = decoded;
-        next();
+        User.findOne({ id: decoded.id })
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(error => {
+            sails.log.error(error)
+            return res.status(500);
+        });
     });
     
 }
