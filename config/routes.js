@@ -38,10 +38,13 @@ module.exports.routes = {
   // Protected
   'GET /api/v1/account' : 'UserController.account',
 
+  // TEAM
   'POST   /api/v1/teams' : 'TeamController.create',
-  'GET    /api/v1/teams' : 'TeamController.read',
-  'PUT    /api/v1/teams' : 'TeamController.update',
-  'DELETE /api/v1/teams' : 'TeamController.delete',
+  'GET    /api/v1/teams' : 'TeamController.list',
+
+  'GET    /api/v1/team/:teamId'  : 'TeamController.read',
+  'PUT    /api/v1/team/:teamId'  : 'TeamController.update',
+  'DELETE /api/v1/teams/:teamId' : 'TeamController.delete',
 
   'GET /api/v1/projects': 'ProjectController.index',
 

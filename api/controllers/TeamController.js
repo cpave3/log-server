@@ -7,10 +7,18 @@
 
 module.exports = {
   
-    index: (req, res) => {
+    list: (req, res) => {
         // TODO: this
         return res.status(200).json({controller: 'team'});
     },
+
+    create: (req, res) => {},
+
+    read: (req, res) => {},
+
+    update: (req, res) => {},
+
+    delete: (req, res) => {},
 
 };
 

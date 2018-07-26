@@ -20,6 +20,10 @@ module.exports.policies = {
   // By default, everything is protected
   '*': 'isAuthorised',
 
+  BaseController: {
+    '*': ['isAuthorised', 'isSuper']
+  },
+
   // Allow access to signup and Authenticate
   UserController: {
     'register': true,

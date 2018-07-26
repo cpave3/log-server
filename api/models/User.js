@@ -46,6 +46,13 @@ module.exports = {
     });
   },
 
+  isSuperUser: async (user) => {
+    return (
+      user.isSuper &&
+      user.isSuper === true
+    )
+  },
+
   attributes: {
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
@@ -65,7 +72,7 @@ module.exports = {
         columnName: 'encryptedPassword'
       },
 
-      is_super: {
+      isSuper: {
         type: 'boolean',
         defaultsTo: false,
         allowNull: false,
