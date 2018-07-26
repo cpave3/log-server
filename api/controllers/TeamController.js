@@ -18,6 +18,8 @@ module.exports = {
      * will be granted ownership of the team
      */
     create: (req, res) => {
+        let status = 200;
+        let data = {};
         try {
             // Verify that the required inputs have been provided
             const requiredFields = [
@@ -30,28 +32,22 @@ module.exports = {
                 if (req.body[field]) {
                     requiredFields.splice(requiredFields.indexOf(field), 1);
                 }
+            });
 
                 // If we have anything left in the array, it is missing from the request
                 if (requiredFields.length > 0) {
                     // This suggests that a field is missing
-                    const status = 400;
-                    const errorData = {
-                        missingField: [...requiredFields]
+                    status = 400;
+                    data = {
+                        missingFields: requiredFields
                     };
                     throw new Error('Request is missing required fields.');
                 }
 
                 // If we made it this far, we should have enough data to make a new Team
-            });
             
         } catch (error) {
-            return res
-            .status(status || 500)
-            .json({
-                error: true,
-                message: error.message,
-                data: errorData || {}
-            });
+            return res.status(status).json(ResponseService.respond(data, error.message, true));
         }
     },
 
