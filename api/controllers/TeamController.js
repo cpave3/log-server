@@ -45,6 +45,17 @@ module.exports = {
                 }
 
                 // If we made it this far, we should have enough data to make a new Team
+                Team.create(data).fetch()
+                .then(team => {
+                    return res.status(201).json(ResponseService.respond({
+                        team
+                    }, 'Team successfully created', false))
+                })
+                .catch(error => {
+                    status = 500;
+                    data = {};
+                    throw new Error(error.message);
+                });
             
         } catch (error) {
             return res.status(status).json(ResponseService.respond(data, error.message, true));
